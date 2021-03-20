@@ -15,6 +15,9 @@ services:
     build: https://github.com/quickn-blog/blog-frontend.git#main
     image: blog-frontend
     restart: always
+    volumes:
+      - ./build/frontend/target:/app/target
+      - ./build/frontend/dist:/app/dist
     networks:
       - blog-network
 
@@ -22,10 +25,8 @@ services:
     build: https://github.com/quickn-blog/blog-backend.git#main
     image: blog-backend
     restart: always
-    volumes:
-      - ./Blog.toml:/app/Blog.toml
     environment: 
-      DATABASE_URL: postgres://admin:testserver@localhost/blog
+      DATABASE_URL: postgres://postgres:testserver@blog-docker_db_1/blog
     networks:
       - blog-network
   

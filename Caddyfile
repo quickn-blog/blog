@@ -5,12 +5,12 @@
 localhost:80
 
 route {
-    reverse_proxy /api/* localhost:8081 {
+    reverse_proxy /api/* blog-docker_blog-backend_1:8081 {
         lb_policy header X-My-Header
 	    header_up Host {http.reverse_proxy.upstream.hostport}
     }
 
-    reverse_proxy /* localhost:8080 {
+    reverse_proxy /* blog-docker_blog-frontend_1:8080 {
         lb_policy header X-My-Header
 	    header_up Host {http.reverse_proxy.upstream.hostport}
     }
