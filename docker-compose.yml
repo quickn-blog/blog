@@ -25,10 +25,15 @@ services:
     build: https://github.com/quickn-blog/blog-backend.git#main
     image: blog-backend
     restart: always
+    volumes:
+      - ./Blog.toml:/app/Blog.toml
     environment: 
       DATABASE_URL: postgres://postgres:testserver@blog-docker_db_1/blog
     networks:
       - blog-network
+    command: 
+      - diesel setup
+      - diesel migration run
   
   db:
     image: postgres
