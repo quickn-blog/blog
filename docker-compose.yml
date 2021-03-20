@@ -28,7 +28,7 @@ services:
     volumes:
       - ./Blog.toml:/app/Blog.toml
     environment: 
-      DATABASE_URL: postgres://postgres:testserver@blog-docker_db_1/blog
+      DATABASE_URL: postgres://postgres:testserver@blog_db_1/blog
     networks:
       - blog-network
     command: 

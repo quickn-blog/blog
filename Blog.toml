@@ -1,7 +1,7 @@
 [server]
-host = "blog-docker_blog-backend_1"
+host = "blog_blog-backend_1"
 port = 8081
-database_url = "postgres://postgres:testserver@blog-docker_db_1/blog"
+database_url = "postgres://postgres:testserver@blog_db_1/blog"
 
 [blog]
 name = "ANEP Research"
