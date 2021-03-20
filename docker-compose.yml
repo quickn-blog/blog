@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  blog-caddy:
+    image: caddy
+    restart: always
+    ports:
+      - "8030:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - blog-network
+
+  blog-frontend:
+    build: https://github.com/quickn-blog/blog-frontend.git#main
+    image: blog-frontend
+    restart: always
+    networks:
+      - blog-network
+
+  blog-backend:
+    build: https://github.com/quickn-blog/blog-backend.git#main
+    image: blog-backend
+    restart: always
+    volumes:
+      - ./Blog.toml:/app/Blog.toml
+    environment: 
+      DATABASE_URL: postgres://admin:testserver@localhost/blog
+    networks:
+      - blog-network
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: testserver
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: overlay
